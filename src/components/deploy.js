@@ -55,7 +55,7 @@ export async function run() {
     safe4337ModuleAddress: "0x3Fdb5BC686e861480ef99A6E3FaAe03c0b9F32e2",
     erc7569LaunchpadAddress: "0xEBe001b3D534B9B6E2500FB78E67a1A137f561CE",
     validators: [
-      { address: "0xCA19336BE38De066336E9774659D15Bf5ea8D550", context: "0x" },
+      { address: "0xd9Ef4a48E4C067d640a9f784dC302E97B21Fd691", context: "0x" },
     ],
   });
   console.log("safeAccount", safeAccount);
@@ -108,7 +108,7 @@ export async function run() {
       "address, bytes, bytes4, address[], uint256[], uint256, uint256, uint256"
     ),
     [
-      account.toString(), // Ensure `account` is a string
+      "0xd9Ef4a48E4C067d640a9f784dC302E97B21Fd691",
       isInstalledContext instanceof Uint8Array
         ? `0x${toHexString(isInstalledContext)}`
         : isInstalledContext, // Convert Uint8Array to hex string if necessary
@@ -128,8 +128,12 @@ export async function run() {
     address: "0xd6503650Ecf85826A367cA8De2253e925B3174d9",
     context: callData,
   });
+
+  console.log("opHash", opHash);
+
   const receipt = await pimlicoBundlerClient.waitForUserOperationReceipt({
     hash: opHash,
   });
+
   console.log("receipt", receipt);
 }
