@@ -51,7 +51,7 @@ export async function run() {
     signer: walletClientToSmartAccountSigner(client),
     safeVersion: "1.4.1",
     entryPoint: ENTRYPOINT_ADDRESS_V07,
-    saltNonce: 5n,
+    saltNonce: 10n,
     safe4337ModuleAddress: "0x3Fdb5BC686e861480ef99A6E3FaAe03c0b9F32e2",
     erc7569LaunchpadAddress: "0xEBe001b3D534B9B6E2500FB78E67a1A137f561CE",
     validators: [
@@ -60,10 +60,9 @@ export async function run() {
   });
   console.log("safeAccount", safeAccount);
 
-  // Transfer 0.01 ETH to the address
   const hash = await client.sendTransaction({
     to: safeAccount.address,
-    value: parseEther("0.0001"),
+    value: parseEther("0.03"),
   });
   console.log("hash", hash);
 
@@ -96,7 +95,7 @@ export async function run() {
   const functionSelector = keccak256(
     new TextEncoder().encode("swapOwner(address,address,address)")
   ).slice(0, 10);
-  const guardianAddr = "0x9401296121FC9B78F84fc856B1F8dC88f4415B2e";
+  const guardianAddr = "0x769A39D8b2F96823Ca180e7C2D1E48aB6a8C1579";
   const guardians = [guardianAddr];
   const guardianWeights = [1];
   const threshold = 1;
@@ -125,7 +124,7 @@ export async function run() {
 
   const opHash = await smartAccountClient.installModule({
     type: "executor",
-    address: "0xd6503650Ecf85826A367cA8De2253e925B3174d9",
+    address: "0x50662de4Ef2A7fb4d162b3C7151217b7E79636dD", // universal email recovery module
     context: callData,
   });
 
